@@ -1,0 +1,23 @@
+/* hello */
+/*
+#historyButton {
+    -fx-text-fill: blue;
+}
+*/
+.greenButton {
+    -fx-text-fill: green;
+}
+
+.blueBackground {
+    -fx-background-color: cornflowerblue;
+    -fx-text-fill: darkblue;
+}
+
+.redButton {
+    -fx-background-color: indianred;
+    -fx-text-fill: black;
+}
+.grayButton {
+    -fx-background-color: gray;
+    -fx-text-fill: black;
+}
