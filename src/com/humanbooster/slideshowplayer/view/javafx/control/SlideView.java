@@ -57,6 +57,9 @@ public class SlideView extends Pane {
             } else if(element instanceof ImageSlideElement) {
                 ImageSlideElement is = (ImageSlideElement) element;
                 String url = String.format("http://placehold.it/%.0fx%.0f", width * is.getWidth(), height * is.getHeight());
+
+                System.out.println(url);
+
                 Image image = new Image(url);
                 gc.drawImage(image, width * is.getX(), height * is.getY());
                 System.out.println(url);

@@ -101,6 +101,9 @@ public class SlideshowController {
             // TODO jeter une exception plus spécifique
             throw new Exception("Cannot call setCurrentSlide if index is out of range!");
         }
+        if (index == currentSlideIndex.intValue()) { // slide did not change, do nothing
+            return;
+        }
 
         Slide oldSlide = slideShow.getSlideAtIndex(currentSlideIndex.intValue());
         currentSlideIndex.set(index); //currentSlideIndex = index;

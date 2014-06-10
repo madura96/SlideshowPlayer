@@ -178,7 +178,7 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
         try {
             sc.setCurrentSlide(0);
             //playPauseButton.setText("Play");
-            statusLabel.setText(sc.getStatus() + ", index=" + sc.getCurrentSlideIndex());
+            //statusLabel.setText(sc.getStatus() + ", index=" + sc.getCurrentSlideIndex());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -188,9 +188,9 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
     public void handleLast(ActionEvent event) {
         try {
             sc.setCurrentSlide(sc.getSlideShow().getNumberOfSlides()-1);
-            playPauseButton.setText("Play");
-            sc.pause();
-            statusLabel.setText(sc.getStatus() + ", index=" + sc.getCurrentSlideIndex());
+            //playPauseButton.setText("Play");
+            //sc.pause();
+            //statusLabel.setText(sc.getStatus() + ", index=" + sc.getCurrentSlideIndex());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -212,9 +212,9 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
                                 + debugArea.getText()
                 );
                 //nslidesLabel.setText("Number of slides: " + sc.getSlideShow().getNumberOfSlides());
-                if (source.isLastSlide()) { // if last slide, pause and set the user button to "Play"
+                if (source.isLastSlide()  && source.getStatus() == SlideshowController.STATUS.PLAYING ) { // if last slide, pause and set the user button to "Play"
                     try {
-                        playPauseButton.setText("Play");
+                        playPauseButton.setText("Replay");
                         source.pause();
                     } catch (Exception e) {
                         e.printStackTrace();

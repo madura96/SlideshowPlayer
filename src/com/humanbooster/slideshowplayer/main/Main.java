@@ -37,7 +37,7 @@ public class Main extends Application {
                 title.setContent("Slide " + i);
                 s.addSlideElement(title);
                 ImageSlideElement image = new ImageSlideElement(0.1,0.4,0.8,0.2);
-                title.setContent("image url");
+                title.setContent("image url " + i);
                 s.addSlideElement(image);
                 ss.addSlide(s);
             }
