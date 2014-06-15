@@ -4,6 +4,9 @@ import com.humanbooster.slideshowplayer.model.ImageSlideElement;
 import com.humanbooster.slideshowplayer.model.Slide;
 import com.humanbooster.slideshowplayer.model.SlideElement;
 import com.humanbooster.slideshowplayer.model.TextSlideElement;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 /**
  * Inspired from http://fxexperience.com/2014/05/resizable-grid-using-canvas/
@@ -82,8 +86,31 @@ public class SlideView extends Pane {
         gc.strokeLine(0, height, width, 0);
     }
 
+//    public void setSlide(Slide slide) {
+//        this.slide = slide;
+//        draw();
+//    }
+
     public void setSlide(Slide slide) {
-        this.slide = slide;
-        draw();
+        // fade out to darkness
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), this);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.play();
+
+        fadeOut.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SlideView.this.slide = slide;
+                draw();
+
+                // fade in to light
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(500), SlideView.this);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            }
+        });
     }
+
 }

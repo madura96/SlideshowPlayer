@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<VBox minHeight="200.0" minWidth="500.0" prefHeight="600.0" prefWidth="800.0" styleClass="greenButton" stylesheets="@../../main/UIMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.humanbooster.slideshowplayer.view.javafx.UIController">
+<VBox minHeight="200.0" minWidth="500.0" prefHeight="600.0" prefWidth="800.0" styleClass="greenButton" stylesheets="@UIMain.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.humanbooster.slideshowplayer.view.javafx.UIController">
    <children>
       <MenuBar prefHeight="0.0" prefWidth="726.0">
         <menus>

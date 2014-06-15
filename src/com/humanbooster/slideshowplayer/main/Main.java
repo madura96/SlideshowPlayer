@@ -58,7 +58,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Sildeshow Player");
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("UIMain.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/com/humanbooster/slideshowplayer/view/javafx/UIMain.css").toExternalForm());
         primaryStage.setMinWidth(600);
         primaryStage.setMinHeight(300);
 
