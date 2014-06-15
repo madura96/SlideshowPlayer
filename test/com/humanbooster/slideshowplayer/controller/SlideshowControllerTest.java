@@ -22,7 +22,7 @@ public class SlideshowControllerTest {
         ss.addSlide(s2);
 
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // when
         Slide nextSlide = sc.nextSlide();
@@ -45,7 +45,7 @@ public class SlideshowControllerTest {
     public void nextSlideIfSlideshowIsEmptyTest() throws Exception {
         // given
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(new Slideshow());
+        sc.setSlideshow(new Slideshow());
         // when
         sc.nextSlide();
         //then
@@ -60,7 +60,7 @@ public class SlideshowControllerTest {
         ss.addSlide(s1);
 
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // when
         sc.nextSlide();
@@ -77,7 +77,7 @@ public class SlideshowControllerTest {
         ss.addSlide(s1);
 
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // when
         Slide currentSlide = sc.getCurrentSlide();
@@ -101,7 +101,7 @@ public class SlideshowControllerTest {
     public void getCurrentSlideIfSlideshowIsEmptyTest() throws Exception {
         // given
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(new Slideshow());
+        sc.setSlideshow(new Slideshow());
         // when
         sc.nextSlide();
         //then
@@ -119,7 +119,7 @@ public class SlideshowControllerTest {
            ss.addSlide(slides.get(i));
         }
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         for (int i = 1; i <sc.getSlideShow().getNumberOfSlides() ; i++) {
             // when
@@ -141,7 +141,7 @@ public class SlideshowControllerTest {
         ss.addSlide(s2);
 
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // when
         sc.nextSlide(); // on est au 2eme slide
@@ -165,7 +165,7 @@ public class SlideshowControllerTest {
     public void previousSlideIfSlideshowIsEmptyTest() throws Exception {
         // given
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(new Slideshow());
+        sc.setSlideshow(new Slideshow());
         // when
         sc.previousSlide();
         //then
@@ -180,7 +180,7 @@ public class SlideshowControllerTest {
         ss.addSlide(s1);
 
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // when
         sc.previousSlide();
@@ -200,7 +200,7 @@ public class SlideshowControllerTest {
             ss.addSlide(slides.get(i));
         }
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         sc.setCurrentSlide(sc.getSlideShow().getNumberOfSlides()-1);
         for (int i = sc.getSlideShow().getNumberOfSlides()-2; i>0 ; i--) {
@@ -224,7 +224,7 @@ public class SlideshowControllerTest {
             ss.addSlide(slides.get(i));
         }
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // create object from interface just for the test, this is called double-test
         CurrentSlideChangedListener listener = new CurrentSlideChangedListener() {
@@ -270,7 +270,7 @@ public class SlideshowControllerTest {
             ss.addSlide(slides.get(i));
         }
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // create object from interface just for the test, this is called double-test
         CurrentSlideChangedListener listener = new CurrentSlideChangedListener() {
@@ -313,7 +313,7 @@ public class SlideshowControllerTest {
             ss.addSlide(slides.get(i));
         }
         SlideshowController sc = new SlideshowController();
-        sc.setSlideShow(ss);
+        sc.setSlideshow(ss);
 
         // create object from interface just for the test, this is called double-test
         CurrentSlideChangedListener listener = new CurrentSlideChangedListener() {

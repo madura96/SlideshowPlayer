@@ -5,6 +5,13 @@ import com.humanbooster.slideshowplayer.controller.SlideshowController;
 import com.humanbooster.slideshowplayer.model.Slide;
 import com.humanbooster.slideshowplayer.view.javafx.control.SlideView;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -53,22 +60,17 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
     @FXML
     private TextField searchTextField;
     @FXML
+    private Label sizeLabel;
+    @FXML
     private Label statusLabel;
 
     @FXML
-    private Label nslidesLabel;
-    @FXML
     private Label indexLabel;
 
-    //@FXML
-    //private MenuItem scrollPane;
-    //@FXML
-    //private MenuItem anchorPane;
-
-    @FXML
-    private ListView listView;
-    @FXML
-    private Button showListButton;
+//    @FXML
+//    private ListView listView;
+//    @FXML
+//    private Button showListButton;
     @FXML
     private MenuItem menuItemHelp;
 
@@ -86,8 +88,8 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
         slidePane.getChildren().add(slideView);
 
         // TODO why sc is null in this method ? it is not created at this stage so it gives exception if accessed !!
-        if(sc != null)
-            nslidesLabel.setText(sc.toString());//Integer.toString(sc.getSlideShow().getNumberOfSlides()));
+        //if(sc != null)
+            //sizeLabel.setText(sc.toString());//Integer.toString(sc.getSlideShow().getNumberOfSlides()));
 
     } // end of Initialize
 
@@ -106,6 +108,25 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
 
             try {
                 slideView.setSlide(sc.getCurrentSlide());
+
+                IntegerProperty ip = new SimpleIntegerProperty();
+                ip.bind(sc.getCurrentSlideIndexProperty().add(1));
+                searchTextField.textProperty().bind(ip.asString()); //sc.getCurrentSlideIndexProperty().asString());
+                sizeLabel.setText("/" + Integer.toString(sc.getSlideShow().getNumberOfSlides()));
+                //sizeLabel.textProperty().bind(new SimpleStringProperty(Integer.toString(sc.getSlideShow().getNumberOfSlides())));
+                //sc.getCurrentSlideIndexProperty().bind(new SimpleIntegerProperty( Integer.parseInt(searchTextField.textProperty().getValue()) ));
+                //searchTextField.textProperty().bind(Bindings.convert(sc.getCurrentSlideIndexProperty()));
+//                or for more advanced use:
+//                searchTextField.textProperty().bind(new StringBinding() {
+//                    {
+//                        bind(sc.getCurrentSlideIndexProperty());  // this property will be monitored for changes
+//                    }
+//
+//                    protected String computeValue() {
+//                        return "# " + sc.getCurrentSlideIndexProperty().get();  // make sure to access the same property in computeValue otherwise the magic doesn't work
+//                    }
+//                });
+
             } catch (Exception e) {
                 popupExceptionDialog(e);
             }
@@ -220,7 +241,7 @@ public class UIController implements Initializable, CurrentSlideChangedListener 
                         e.printStackTrace();
                     }
                 }
-                indexLabel.setText("Slide: " + sc.getCurrentSlideIndex() + "/" + sc.getSlideShow().getNumberOfSlides());
+                //indexLabel.setText("Slide: " + sc.getCurrentSlideIndex() + "/" + sc.getSlideShow().getNumberOfSlides());
                 statusLabel.setText(sc.getStatus() + ", index=" + sc.getCurrentSlideIndex());
 
 

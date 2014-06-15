@@ -6,6 +6,8 @@ package com.humanbooster.slideshowplayer.model;
 public class SlideElementWithContentBase extends SlideElementBase {
     private String content;
 
+
+
     public  SlideElementWithContentBase(double x, double y, double width, double height) {
         super(x, y, width, height);
         //System.out.println("in " + getClass().getName());
@@ -16,5 +18,10 @@ public class SlideElementWithContentBase extends SlideElementBase {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+     public String toString() {
+        return super.toString() + " " + content;
     }
 }

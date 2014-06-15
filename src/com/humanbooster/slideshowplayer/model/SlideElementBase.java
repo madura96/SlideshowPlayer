@@ -5,8 +5,8 @@ package com.humanbooster.slideshowplayer.model;
  * la taille 1 = 100% du slide mais elle peut être supérieure à 1
  */
 public class SlideElementBase implements SlideElement {
-    private double x; // slideElement's upper left x coordinate on he screen
-    private double y; // slideElement's upper left y coordinate on he screen
+    private double x; // slideElement's upper left x coordinate on the screen
+    private double y; // slideElement's upper left y coordinate on the screen
     private double width; // percentage of the slide's width
     private double height; // percentage of the slide's height
 
@@ -53,10 +53,6 @@ public class SlideElementBase implements SlideElement {
     @Override
     public String toString() {
         return getClass().getSimpleName() +
-                "x=" + x +
-                ", y=" + y +
-                ", width=" + width +
-                ", height=" + height +
-                '}';
+                "(x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ')';
     }
 }

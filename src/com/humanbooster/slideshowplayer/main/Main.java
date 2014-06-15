@@ -20,31 +20,18 @@ import java.net.URL;
 public class Main extends Application {
 
     // create slideshow controller
-    SlideshowController sc = new SlideshowController();
+    private SlideshowController sc = null;
 
     @Override
     public void init() throws Exception {
         super.init();
 
         try {
-            //  create a slideshow
-            Slideshow ss = new Slideshow();
-
-            for (int i = 0; i < 10; i++) { // add 10 slides
-                Slide s = new Slide();
-                // slide = titre + image
-                TextSlideElement title = new TextSlideElement(0.1,0.4,0.8,0.2);
-                title.setContent("Slide " + i);
-                s.addSlideElement(title);
-                ImageSlideElement image = new ImageSlideElement(0.1,0.4,0.8,0.2);
-                title.setContent("image url " + i);
-                s.addSlideElement(image);
-                ss.addSlide(s);
-            }
-            // give slideshow to controller
-            sc.setSlideShow(ss);
-            System.out.format("Slideshow of %d slides is created\n", 10);
-           //launch(args);
+            sc = new SlideshowController(); // create slideshow controller
+            sc.setTransitionTimeBetweenSlides(1000);
+            //sc.setSlideshow(dummySlideshowFactory()); // create sildeshow and give it to its controller
+            sc.setSlideshow(defaultSlideshowFactory());
+            //launch(args);
 
             ConsoleView view = new ConsoleView();
             sc.addCurrentSlideChangedListener(view);
@@ -69,41 +56,11 @@ public class Main extends Application {
         Parent root = (Parent) fxmlLoader.load(location.openStream());
         Scene scene = new Scene(root, 1024, 700);
 
-/*
-        // code to have resizable contents in window
-        Region contentRootRegion = (Region) fxmlLoader.load(location.openStream());
-        //Set a default "standard" or "100%" resolution
-        double origW = 960; //1366
-        double origH = 540; //768
-
-        //If the Region containing the GUI does not already have a preferred width and height, set it.
-        //But, if it does, we can use that setting as the "standard" resolution.
-        if ( contentRootRegion.getPrefWidth() == Region.USE_COMPUTED_SIZE )
-            contentRootRegion.setPrefWidth( origW );
-        else
-            origW = contentRootRegion.getPrefWidth();
-
-        if ( contentRootRegion.getPrefHeight() == Region.USE_COMPUTED_SIZE )
-            contentRootRegion.setPrefHeight( origH );
-        else
-            origH = contentRootRegion.getPrefHeight();
-
-        //Wrap the resizable content in a non-resizable container (Group)
-        Group group = new Group( contentRootRegion );
-        //Place the Group in a StackPane, which will keep it centered
-        StackPane rootPane = new StackPane();
-        rootPane.getChildren().add( group );
-
-         //Create the scene initally at the "100%" size
-        Scene scene = new Scene( rootPane, origW, origH );
-        //Bind the scene's width and height to the scaling parameters on the group
-        group.scaleXProperty().bind( scene.widthProperty().divide( origW ) );
-        group.scaleYProperty().bind( scene.heightProperty().divide( origH ) );
-*/
-
         primaryStage.setTitle("Sildeshow Player");
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("UIMain.css").toExternalForm());
+        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(300);
 
         UIController uic = fxmlLoader.getController();
         if (uic != null) {
@@ -134,6 +91,52 @@ public class Main extends Application {
     }
 
 
+    private Slideshow dummySlideshowFactory() {
+        //  create a slideshow
+        Slideshow slideshow = new Slideshow();
+
+        for (int i = 0; i < 10; i++) { // add 10 slides
+            Slide s = new Slide();
+
+            TextSlideElement title = new TextSlideElement(0.1,0.1,0.8,0.2);
+            title.setContent("slide " + i);
+            s.addSlideElement(title);
+
+            ImageSlideElement image = new ImageSlideElement(0.1,0.4,0.8,0.5);
+
+            image.setContent("http://placehold.it/" + ((i+1)*100) + "x" + ((i+1)*20));
+            s.addSlideElement(image);
+
+            slideshow.addSlide(s);
+        }
+        System.out.format("Slideshow of %d slides is created\n", 10);
+        return slideshow;
+    }
+
+    private Slideshow defaultSlideshowFactory() {
+        Slideshow slideshow = new Slideshow();
+        slideshow.addSlide(this.slideFactory("Bromo", "/resources/images/bromo.jpg"));
+        slideshow.addSlide(this.slideFactory("Malaysia", "/resources/images/malaysia.jpg"));
+        slideshow.addSlide(this.slideFactory("Mercantour", "/resources/images/mercantour.jpg"));
+        slideshow.addSlide(this.slideFactory("Seychelles", "/resources/images/seychelles.jpg"));
+        slideshow.addSlide(this.slideFactory("Vietnam", "/resources/images/vietnam.jpg"));
+        slideshow.addSlide(this.slideFactory("Brazil", "/resources/images/brazil.jpg"));
+        return slideshow;
+    }
+    private Slide slideFactory(String title, String imageURL) {
+        Slide s = new Slide();
+
+        TextSlideElement textSlideElement = new TextSlideElement(0.025,0.025, 0.95, 0.05);  // TextSlideElement
+        textSlideElement.setContent(title);
+
+        ImageSlideElement imageSlideElement = new ImageSlideElement(0.025,0.1, 0.95, 0.875); // ImageSlideElement
+        imageSlideElement.setContent(imageURL);
+
+        s.addSlideElement(textSlideElement);
+        s.addSlideElement(imageSlideElement);
+
+        return s;
+    }
 
 }
 

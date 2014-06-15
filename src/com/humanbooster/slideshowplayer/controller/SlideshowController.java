@@ -19,9 +19,10 @@ public class SlideshowController {
     public static enum STATUS {PLAYING, PAUSED, STOPPED}
     private STATUS status = STATUS.STOPPED;
 
-    private final int transitionTime = 1000;
+    private int transitionTimeBetweenSlides = 1000;
     private Slideshow slideShow = null;
-    private IntegerProperty currentSlideIndex = new SimpleIntegerProperty(-1); // TODO reset before each test
+
+    public IntegerProperty currentSlideIndex = new SimpleIntegerProperty(-1); // TODO reset before each test
 
     private TimerTask currentTask;
 
@@ -34,12 +35,23 @@ public class SlideshowController {
     public int getCurrentSlideIndex() {
         return currentSlideIndex.get();
     }
-//    public IntegerProperty currentSlideIndexProperty() {
-//        return currentSlideIndex;
-//    }
+
+    public IntegerProperty getCurrentSlideIndexProperty() {
+        return currentSlideIndex;
+    }
+
+    public int getTransitionTimeBetweenSlides() {
+        return transitionTimeBetweenSlides;
+    }
+
+    public void setTransitionTimeBetweenSlides(int transitionTimeBetweenSlides) {
+        this.transitionTimeBetweenSlides = transitionTimeBetweenSlides;
+    }
+
     public boolean isFirstSlide() {
         return (currentSlideIndex.get() == 0 ?  true : false);
     }
+
     public boolean isLastSlide() {
         return (currentSlideIndex.get() == slideShow.getNumberOfSlides()-1 ?  true : false);
     }
@@ -48,7 +60,7 @@ public class SlideshowController {
         return slideShow;
     }
 
-    public void setSlideShow(Slideshow slideShow) {
+    public void setSlideshow(Slideshow slideShow) {
         this.slideShow = slideShow;
         currentSlideIndex.set(0); //currentSlideIndex = 0;
     }
@@ -231,7 +243,7 @@ public class SlideshowController {
         };
 
         this.status = STATUS.PLAYING; // better enter mode playing before launching task
-        t.schedule(currentTask, 0, transitionTime);
+        t.schedule(currentTask, 0, transitionTimeBetweenSlides);
     }
 
 
